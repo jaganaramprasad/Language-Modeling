@@ -96,7 +96,13 @@ Parameters: 2D list of strs
 Returns: dict mapping strs to ints
 '''
 def countStartWords(corpus):
-    return
+    dicts={}
+    l=[]
+    for i in corpus:
+        l.append(i[0])
+    for item in l:
+        dicts[item]=l.count(item)
+    return dicts
 
 
 '''
@@ -323,6 +329,7 @@ if __name__ == "__main__":
     # test.testBuildVocabulary()
     # test.testCountUnigrams()
     test.testGetStartWords()
+    test.testCountStartWords()
 
     ## Uncomment these for Week 2 ##
 """
