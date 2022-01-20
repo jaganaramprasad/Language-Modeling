@@ -112,7 +112,17 @@ Parameters: 2D list of strs
 Returns: dict mapping strs to (dicts mapping strs to ints)
 '''
 def countBigrams(corpus):
-    return
+    dicts={}
+    for i in range (len(corpus)): # 0,1
+        for j in range (len(corpus[i])-1):      # [["hello", "world"], ["hello", "world", "again"] ])
+            f=corpus[i][j]
+            s=corpus[i][j+1]
+            if f not in dicts:
+                dicts[f]={}
+            if s not in dicts[f]:
+                dicts[f][s]=0
+            dicts[f][s]+=1
+    return dicts
 
 
 ### WEEK 2 ###
@@ -328,8 +338,9 @@ if __name__ == "__main__":
     # test.testGetCorpusLength()
     # test.testBuildVocabulary()
     # test.testCountUnigrams()
-    test.testGetStartWords()
-    test.testCountStartWords()
+    # test.testGetStartWords()
+    # test.testCountStartWords()
+    test.testCountBigrams()
 
     ## Uncomment these for Week 2 ##
 """
