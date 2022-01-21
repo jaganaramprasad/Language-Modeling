@@ -5,6 +5,8 @@ Roll No:
 """
 
 from audioop import reverse
+from pickletools import string1
+import string
 import language_tests as test
 
 project = "Language" # don't edit this
@@ -209,7 +211,14 @@ Returns: str
 '''
 from random import choices
 def generateTextFromUnigrams(count, words, probs):
-    return
+    list1=[]
+    for i in range (count):
+        list1.append(choices(words, weights=probs)) #"hello world hello"
+    string1="" 
+    for i in list1:
+        for j in i:
+            string1=string1+" " +j 
+    return string1
 
 
 '''
@@ -378,7 +387,8 @@ if __name__ == "__main__":
     #test.testBuildUniformProbs()
     # test.testBuildUnigramProbs()
     #test.testBuildBigramProbs()
-    test.testGetTopWords()
+    # test.testGetTopWords()
+    test.testGenerateTextFromUnigrams()
 
     ## Uncomment these for Week 2 ##
 """
