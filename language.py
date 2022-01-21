@@ -4,6 +4,7 @@ Name:
 Roll No:
 """
 
+from audioop import reverse
 import language_tests as test
 
 project = "Language" # don't edit this
@@ -183,7 +184,21 @@ Parameters: int ; list of strs ; list of floats ; list of strs
 Returns: dict mapping strs to floats
 '''
 def getTopWords(count, words, probs, ignoreList):
-    return
+    # dicts={}
+    # for i in words:
+    #     for j in probs:
+    #         if i not in dicts:
+    #             dicts[i]=j
+    # print(dicts)
+    
+    d= dict(zip(words,probs ))  #[("hello",0.4),("world",0.4)("again",0.2)]
+    new=dict(sorted(d.items(),key=lambda x:x[1],reverse=True))
+    #print(new)
+    dicts={}
+    for key,values in new.items():
+        if key not in ignoreList and len(dicts)<count:
+            dicts[key]=values
+    return dicts
 
 
 '''
@@ -362,7 +377,8 @@ if __name__ == "__main__":
     #test.testCountBigrams()
     #test.testBuildUniformProbs()
     # test.testBuildUnigramProbs()
-    test.testBuildBigramProbs()
+    #test.testBuildBigramProbs()
+    test.testGetTopWords()
 
     ## Uncomment these for Week 2 ##
 """
