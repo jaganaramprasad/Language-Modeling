@@ -311,7 +311,42 @@ Parameters: 2D list of strs ; 2D list of strs ; int
 Returns: dict mapping strs to (lists of values)
 '''
 def setupChartData(corpus1, corpus2, topWordCount):
-    return
+    top_words=[]
+    corpus1_probs=[]
+    corpus2_probs=[]
+    dict1={}
+
+    count1=countUnigrams(corpus1)
+    words1=buildVocabulary(corpus1)
+    probs1=buildUnigramProbs(words1,count1,getCorpusLength(corpus1))
+    top1 =getTopWords(topWordCount, words1, probs1, ignore)
+    
+
+    count2=countUnigrams(corpus2)
+    words2=buildVocabulary(corpus2)
+    probs2=buildUnigramProbs(words2,count2,getCorpusLength(corpus2))
+    top2=getTopWords(topWordCount, words2, probs2, ignore)
+    
+    top_words=top_words+list(top1.keys())
+    for i in top2.keys():
+        if i not in top_words:
+            top_words.append(i)
+    for j in top_words:
+        if j in words1:
+            r=words1.index(j)
+            corpus1_probs.append(probs1[r])
+        else:
+            corpus1_probs.append(0)
+        if j in words2:
+            z=words2.index(j)
+            corpus2_probs.append(probs2[z])
+        else:
+            corpus2_probs.append(0)
+    dict1["topWords"]=top_words
+    dict1["corpus1Probs"]=corpus1_probs
+    dict1["corpus2Probs"]=corpus2_probs
+
+    return dict1
 
 
 '''
@@ -321,6 +356,12 @@ Parameters: 2D list of strs ; str ; 2D list of strs ; str ; int ; str
 Returns: None
 '''
 def graphTopWordsSideBySide(corpus1, name1, corpus2, name2, numWords, title):
+    new=setupChartData(corpus1,corpus2,numWords)
+    xValues=new["topWords"]
+    values1=new["corpus1Probs"]
+    values2=new["corpus2Probs"]
+    sideBySideBarPlots(xValues, values1, values2, name1, name2, title)
+
     return
 
 
@@ -331,6 +372,12 @@ Parameters: 2D list of strs ; 2D list of strs ; int ; str
 Returns: None
 '''
 def graphTopWordsInScatterplot(corpus1, corpus2, numWords, title):
+    new=setupChartData(corpus1,corpus2,numWords)
+    labels=new["topWords"]
+    xs=new["corpus1Probs"]
+    ys=new["corpus2Probs"]
+    scatterPlot(xs, ys, labels, title)
+    
     return
 
 
@@ -427,6 +474,7 @@ if __name__ == "__main__":
     #test.testGenerateTextFromUnigrams()
     #test.testGenerateTextFromBigrams()
     #test.runWeek2()
+    test.testSetupChartData()
     test.runWeek3()
     ## Uncomment these for Week 2 ##
 """
