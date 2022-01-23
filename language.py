@@ -60,8 +60,13 @@ Parameters: 2D list of strs
 Returns: list of strs
 '''
 def buildVocabulary(corpus):
-    total=list(set(sum(corpus,[])))
-    return total
+    # total=list(set(sum(corpus,[])))
+    list1=[]
+    for i in corpus:
+        for j in i:
+            if j not in list1:
+                list1.append(j)
+    return list1
 
 
 '''
@@ -258,6 +263,8 @@ Parameters: 2D list of strs
 Returns: None
 '''
 def graphTop50Words(corpus):
+
+
     return
 
 
@@ -392,7 +399,7 @@ if __name__ == "__main__":
     # test.runWeek1()
     # test.testLoadBook()
     # test.testGetCorpusLength()
-    # test.testBuildVocabulary()
+    #test.testBuildVocabulary()
     # test.testCountUnigrams()
     # test.testGetStartWords()
     # test.testCountStartWords()
@@ -402,8 +409,9 @@ if __name__ == "__main__":
     #test.testBuildBigramProbs()
     # test.testGetTopWords()
     #test.testGenerateTextFromUnigrams()
-    test.testGenerateTextFromBigrams()
+    #test.testGenerateTextFromBigrams()
     #test.runWeek2()
+    test.runWeek3()
     ## Uncomment these for Week 2 ##
 """
     print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
@@ -411,9 +419,11 @@ if __name__ == "__main__":
     print("\n" + "#"*15 + " WEEK 2 OUTPUT " + "#" * 15 + "\n")
     test.runWeek2()
 """
+    
 
     ## Uncomment these for Week 3 ##
 """
     print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
     test.runWeek3()
+
 """
