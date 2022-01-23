@@ -1,0 +1,1 @@
+l = len(a)-1 # print(l%2) if len(a) == 0: return None if l % 2 == 0: # print(a[(l/2)]) return a[int(l/2)] else: x = math.ceil(l/2) # print(x) return ((a[x-1] + a[x])/2)
